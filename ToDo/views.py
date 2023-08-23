@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from .models import ToDoItem
 from .serializers import ToDoItemSerializer
 from django.db.models import Q
@@ -11,6 +12,7 @@ from django.db.models import Q
 class ToDoItemViewSet(viewsets.ModelViewSet):
     queryset = ToDoItem.objects.all()
     serializer_class = ToDoItemSerializer
+    permission_classes = [AllowAny]
 
     def filter_queryset(self, queryset):  # titleもしくはdescriptionと入力したkeywordが部分一致したものだけを表示する
         keyword = self.request.query_params.get('keyword', None)
