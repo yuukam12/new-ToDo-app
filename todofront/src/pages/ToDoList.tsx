@@ -1,7 +1,6 @@
 import React from 'react';
-import ToDoContent from '../components/ToDoContent';
-import SearchWindow from '../components/SearchWindow';
-import AddButton from '../components/AddButton';
+import {ToDoContent, SearchWindow, AddButton} from '../components/ToDoContent';
+import Stack from '@mui/material/Stack';
 
 const ToDoList: React.FC = () => {
     const dummyData = [
@@ -11,17 +10,17 @@ const ToDoList: React.FC = () => {
     ];
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ marginBottom: '10px' }}>
+        <Stack direction="column">
+            <Stack style={{ marginBottom: '10px' }}>
                 <SearchWindow />
-            </div>
-            <div style={{ marginLeft: 'auto', marginBottom: '10px'}}>
+            </Stack>
+            <Stack style={{ marginLeft: 'auto', marginBottom: '10px'}}>
                 <AddButton />
-            </div>
+            </Stack>
             {dummyData.map((item) => (
                 <ToDoContent id={item.id} title={item.title} />
             ))}
-        </div>
+        </Stack>
 
     );
 };
