@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToDoItem, SearchInputProps, Props } from '../types/type';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -7,11 +8,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AddIcon from '@mui/icons-material/Add';
 import Stack from '@mui/material/Stack';
 
-type ToDoItem = {
-    id: string;
-    title: string;
-}
-export const ToDoContent: React.FC<ToDoItem> = ({ title }) => {
+
+export const ToDoContent: React.FC<ToDoItem> = ({title }) => {
     return (
         <Stack
             direction="row"
@@ -29,8 +27,7 @@ export const ToDoContent: React.FC<ToDoItem> = ({ title }) => {
     );
 };
 
-type SearchInputProps = {
-}
+
 export const SearchWindow: React.FC<SearchInputProps> = ({ }) => {
     return (
         <Stack direction="row" alignItems="center">
@@ -49,8 +46,6 @@ export const SearchWindow: React.FC<SearchInputProps> = ({ }) => {
     );
 };
 
-type Props = {
-}
 export const AddButton: React.FC<Props> = ({ }) => {
     return (
         <Stack direction="row" alignItems="center">

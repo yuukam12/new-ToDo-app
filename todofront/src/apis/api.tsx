@@ -1,7 +1,7 @@
-const BASE_URL = 'http://127.0.0.1:8000/ToDo'; 
+import { BASE_URL } from "../constants/constant";
 
-export async function fetchItems() {
-    const response = await fetch(`${BASE_URL}/todos/`);
+export async function fetchToDoItems() {
+    const response = await fetch(`${BASE_URL}/todos`);
     const data = await response.json();
     return data;
 }

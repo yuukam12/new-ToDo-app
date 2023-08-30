@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
 
 urlpatterns = [
+    path('ToDo/', include('ToDo.urls')),  # ToDoアプリのurls.pyを取り込んでいます
     path('admin/', admin.site.urls),
 ]
