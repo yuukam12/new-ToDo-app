@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToDoItem, SearchInputProps, Props } from '../types/type';
+import { ToDoItem, SearchInputProps, Props, ToDoItemDetail } from '../types/type';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -52,6 +52,19 @@ export const AddButton: React.FC<Props> = ({ }) => {
              <Button variant="outlined" color = "inherit" endIcon={<AddIcon />}>
             追加
             </Button>
+        </Stack>
+    );
+};
+
+export const ToDoDetail: React.FC<ToDoItemDetail> = ({title, description,created_at}) => {
+    return (
+        <Stack>
+            <Stack direction="row" alignItems="center" spacing={2}>
+                <Typography variant="h3">{title}</Typography>
+                <Button variant='outlined' color='inherit'>編集</Button>
+            </Stack>
+            <Typography variant="body2" color='lightgray'>{created_at}</Typography>
+            <Typography variant="body1">{description}</Typography>
         </Stack>
     );
 };
