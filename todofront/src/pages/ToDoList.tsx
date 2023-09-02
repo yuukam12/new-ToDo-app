@@ -7,14 +7,10 @@ import Stack from '@mui/material/Stack';
 const ToDoList: React.FC = () => {
     const [items, setItems] = useState<ToDoItem[]>([]);
 
-    // ページがマウントされた時にデータを取得する
     useEffect(() => {
-        // 非同期関数を定義
         async function fetchData() {
             try {
-                // fetchItems関数でアイテムデータを取得
                 const data = await fetchToDoItems();
-                // アイテムデータをstateにセット
                 setItems(data);
             } catch (error) {
                 // エラーが発生した場合の処理
@@ -33,7 +29,7 @@ const ToDoList: React.FC = () => {
                 <AddButton />
             </Stack>
             {items.map((item) => (
-                <ToDoContent id={item.id} title={item.title} />
+                <ToDoContent key = {item.id} id={item.id} title={item.title} />
             ))}
         </Stack>
 

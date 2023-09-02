@@ -1,19 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchToDoItemDetail } from '../apis/api';
 import {ToDoDetail} from '../components/ToDoContent';
 import Stack from '@mui/material/Stack';
 import { ToDoItemDetail } from '../types/type';
+import { useParams } from 'react-router-dom';
 
 const ToDoDetailPage: React.FC = () => {
-    const exampleItem: ToDoItemDetail = {
-        id: '1',
-        title: 'Sample ToDo Item',
-        description: 'This is a sample ToDo item.',
-        created_at: '2023-08-30T12:34:56',
-    };
+    const [itemDetail, setItemDetail] = useState<ToDoItemDetail | null>(null);
+    const { id } = useParams();
+
+    useEffect(() => {
+        // データを非同期に取得
+        async function fetchData() {
+          try {
+            if (id) {
+              // 文字列型のIDをそのまま使用
+              const data = await fetchToDoItemDetail(id);
+              setItemDetail(data);
+            }
+          } catch (error) {
+            console.error('Error fetching item detail:', error);
+          }
+        }    
+    
+        if (id) {
+          fetchData();
+        }
+    }, [id]); // コンポーネントがマウントされたときにデータを取得
+    
     return(
         <Stack>
-           <ToDoDetail id={exampleItem.id} title={exampleItem.title} description={exampleItem.description} created_at={exampleItem.created_at}/>
-        </Stack>
+            {itemDetail ? (
+          <ToDoDetail
+            id={itemDetail.id}
+            title={itemDetail.title}
+            description={itemDetail.description}
+            created_at={itemDetail.created_at}
+          />
+        ) : (
+          <Stack>Loading...</Stack>
+        )}
+      </Stack>
     );
 }
 export default ToDoDetailPage;
