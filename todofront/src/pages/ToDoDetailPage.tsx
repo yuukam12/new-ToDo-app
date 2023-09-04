@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchToDoItemDetail } from '../apis/api';
-import {ToDoDetail} from '../components/ToDoContent';
+import { ToDoDetail } from '../components/ToDoDetail';
 import Stack from '@mui/material/Stack';
 import { ToDoItemDetail } from '../types/type';
 import { useParams } from 'react-router-dom';

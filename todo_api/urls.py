@@ -19,6 +19,6 @@ from django.urls import path
 from django.urls import include
 
 urlpatterns = [
-    path('ToDo/', include('ToDo.urls')),  # ToDoアプリのurls.pyを取り込んでいます
+    path('todo/', include('todo.urls')),  # ToDoアプリのurls.pyを取り込んでいます
     path('admin/', admin.site.urls),
 ]
