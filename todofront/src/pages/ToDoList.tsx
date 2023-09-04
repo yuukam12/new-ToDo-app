@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {ToDoItem} from '../types/type'
+import { ToDoItem } from '../types/type'
 import { fetchToDoItems } from '../apis/api';
-import {ToDoContent, SearchWindow, AddButton} from '../components/ToDoContent';
+import { ToDoContent } from '../components/ToDoContent';
+import { SearchWindow } from '../components/SearchWindow';
+import { AddButton } from '../components/AddButton';
 import Stack from '@mui/material/Stack';
 
 const ToDoList: React.FC = () => {

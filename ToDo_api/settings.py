@@ -64,7 +64,7 @@ CORS_ORIGIN_WHITELIST = (  # これ
     'http://localhost:3000',
 )
 
-ROOT_URLCONF = 'ToDoa_api.urls'
+ROOT_URLCONF = 'todo_api.urls'
 
 TEMPLATES = [
     {
@@ -82,7 +82,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ToDo_api.wsgi.application'
+WSGI_APPLICATION = 'todo_api.wsgi.application'
 
 
 # Database
