@@ -3,8 +3,9 @@ import Button from '@mui/material/Button'
 import AddIcon from '@mui/icons-material/Add'
 import Stack from '@mui/material/Stack'
 
-export type Props = {
+type Props = {
 }
+
 export const AddButton: React.FC<Props> = ({}) => {
     return (
       <Stack direction="row" alignItems="center">
