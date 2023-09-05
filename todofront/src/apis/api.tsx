@@ -18,3 +18,14 @@ export async function fetchToDoItemDetail(id: string) {
     throw error;
   }
 }
+
+export async function updateToDoItem(id: string, newTitle: string, newDescription: string) {
+  try {
+    await axios.put(`${BASE_URL}/todos/${id}`, {
+      title: newTitle,
+      description: newDescription,
+    });
+  } catch (error) {
+    throw error;
+  }
+}
