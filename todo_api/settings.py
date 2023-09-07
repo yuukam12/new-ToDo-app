@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # (追加）DRFを使う
     'corsheaders',
-    'ToDo',  # (追加)ToDoというアプリケーションを管理する
+    'todo',  # (追加)ToDoというアプリケーションを管理する
 ]
 
 REST_FRAMEWORK = {  # 追加
