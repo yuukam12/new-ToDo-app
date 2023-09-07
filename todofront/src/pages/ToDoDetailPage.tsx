@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchToDoItemDetail } from '../apis/api';
+import { getToDoItemDetail } from '../apis/api';
 import { ToDoDetail } from '../components/ToDoDetail';
 import Stack from '@mui/material/Stack';
 import { ToDoItemDetail } from '../types/type';
@@ -15,7 +15,7 @@ const ToDoDetailPage: React.FC = () => {
           try {
             if (id) {
               // 文字列型のIDをそのまま使用
-              const data = await fetchToDoItemDetail(id);
+              const data = await getToDoItemDetail(id);
               setItemDetail(data);
             }
           } catch (error) {

@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom'; 
-import { fetchToDoItemDetail } from '../apis/api';
+import { getToDoItemDetail } from '../apis/api';
 
 type Props = {
   id: string;
@@ -16,7 +16,7 @@ export const ToDoContent: React.FC<Props> = ({id, title }) => {
     const onClick = () => {
         // ToDoContentがクリックされたときの処理
         console.log('ToDoContent clicked with ID:', id);
-        fetchToDoItemDetail(id)
+        getToDoItemDetail(id)
       .then(() => {
         // 取得した詳細情報を表示
 

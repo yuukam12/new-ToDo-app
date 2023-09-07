@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ToDoItem } from '../types/type'
-import { fetchToDoItems } from '../apis/api';
+import { getToDoItems } from '../apis/api';
 import { ToDoContent }from '../components/ToDoContent';
 import { AddButton } from '../components/AddButton';
 import { SearchWindow } from '../components/SearchWindow';
@@ -12,7 +12,7 @@ const ToDoList: React.FC = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await fetchToDoItems();
+                const data = await getToDoItems();
                 setItems(data);
             } catch (error) {
                 // エラーが発生した場合の処理
