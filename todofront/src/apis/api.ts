@@ -5,7 +5,7 @@ const ToDoApi = axios.create({
   baseURL: BASE_URL,
 });
 
-export async function fetchToDoItems() {
+export async function getToDoItems() {
   try {
     const response = await ToDoApi.get(`/todos`);
     return response.data;
@@ -14,7 +14,7 @@ export async function fetchToDoItems() {
   }
 }
 
-export async function fetchToDoItemDetail(id: string) {
+export async function getToDoItemDetail(id: string) {
   try {
     const response = await ToDoApi.get(`/todos/${id}`);
     return response.data;
