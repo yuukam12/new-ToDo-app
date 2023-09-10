@@ -36,7 +36,7 @@ export async function updateToDoItem(id: string, Title: string, Description: str
 
 export async function deleteToDoItem(id: string) {
   try{
-    await ToDoApi.delete(`/todos/${id}`);
+    await ToDoApi.delete(`/todos/${id}/`);
     console.log('ToDoItemを削除しました');
   } catch (error){
   throw error;
