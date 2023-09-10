@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -13,12 +13,21 @@ type Props = {
   open: boolean;
   onClose: () => void;
   id: string;
+  title: string;
+  description: string;
 };
 
-export const ToDoModal: React.FC<Props> = ({ open, onClose, id }) => {
+export const ToDoModal: React.FC<Props> = ({ open, onClose, id, title, description}) => {
     const [Title, setTitle] = useState('');
     const [Description, setDescription] = useState('');
     const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+
+    useEffect(() => {
+        setTitle(title);
+    }, [title]); //Titleの初期値に編集前のtitleを入れる
+    useEffect(() => {
+        setTitle(description);
+    }, [description]); 
 
     const handleSave = () => {
         updateToDoItem(id, Title, Description)

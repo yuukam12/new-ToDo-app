@@ -1,4 +1,4 @@
-import  React ,{ useState } from 'react';
+import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -39,6 +39,8 @@ export const ToDoDetail: React.FC<Props> = ({ id, title, description, created_at
                 open={isModalOpen}
                 onClose={handleCloseModal}
                 id={id}
+                title={title}
+                description={description}
                 />
             )}
         </Stack>
