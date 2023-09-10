@@ -26,7 +26,7 @@ export const ToDoModal: React.FC<Props> = ({ open, onClose, id, title, descripti
         setTitle(title);
     }, [title]); //Titleの初期値に編集前のtitleを入れる
     useEffect(() => {
-        setTitle(description);
+        setDescription(description);
     }, [description]); 
 
     const handleSave = () => {
