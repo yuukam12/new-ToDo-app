@@ -28,17 +28,16 @@ const ToDoList: React.FC = () => {
     
     return (
         <Stack direction="column">
-            <Stack style={{ marginBottom: '10px' }}>
-                <SearchWindow />
+            <Stack style={{ paddingBottom: '10px' }}>
+            <SearchWindow />
             </Stack>
-            <Stack style={{ marginLeft: 'auto', marginBottom: '10px'}}>
-                <AddButton />
+            <Stack style={{ marginLeft: 'auto', paddingBottom: '10px' }}>
+            <AddButton />
             </Stack>
             {items.map((item) => (
                 <ToDoContent id={item.id} title={item.title} />
             ))}
         </Stack>
-
     );
 };
 
