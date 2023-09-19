@@ -38,17 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',  # (追加）DRFを使う
-    'markdownx',  # (追加)
+    'corsheaders',
     'ToDo',  # (追加)ToDoというアプリケーションを管理する
 ]
 
 REST_FRAMEWORK = {  # 追加
     'DEFAULT_PERMISSION_CLASSES': [  # 誰にアクセス許可をするか
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly ',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ]
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,7 +60,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ToDo_api.urls'
+CORS_ORIGIN_WHITELIST = (  # これ
+    'http://localhost:3000',
+)
+
+ROOT_URLCONF = 'todo_api.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +82,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ToDo_api.wsgi.application'
+WSGI_APPLICATION = 'todo_api.wsgi.application'
 
 
 # Database
