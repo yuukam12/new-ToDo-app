@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',  # (追加）DRFを使う
-    'markdownx',  # (追加)
     'ToDo',  # (追加)ToDoというアプリケーションを管理する
 ]
 
