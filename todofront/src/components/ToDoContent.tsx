@@ -13,10 +13,10 @@ import {
 type Props = {
   id: string;
   title: string;
-  onDelete: () => void ;
+  fetchData: () => void ;
 }
 
-export const ToDoContent: React.FC<Props> = ({id, title, onDelete }) => {
+export const ToDoContent: React.FC<Props> = ({id, title, fetchData }) => {
     const navigate = useNavigate();
     //const setItemDetail = useState<ToDoItemDetail | null>(null);
     const onClick = () => {
@@ -33,15 +33,12 @@ export const ToDoContent: React.FC<Props> = ({id, title, onDelete }) => {
       });
     };
 
-    const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-    const deleteButtonClick = ()=>{
-        setIsConfirmationOpen(true)
-    }
     const deleteItem = ()=>{
         deleteToDoItem(id)
-        setIsConfirmationOpen(false)
-        onDelete();
+        setIsOpen(false)
+        fetchData();
     }
 
     return (
@@ -54,10 +51,10 @@ export const ToDoContent: React.FC<Props> = ({id, title, onDelete }) => {
             borderRadius="4px"
         >
             <Typography variant="h6" onClick={onClick}>{title}</Typography>
-            <Button variant="contained"  style={{ backgroundColor: '#555'}} onClick={deleteButtonClick}>
+            <Button variant="contained"  style={{ backgroundColor: '#555'}} onClick={()=>setIsOpen}>
                 削除
             </Button>
-            <Dialog open={isConfirmationOpen}>
+            <Dialog open={isOpen}>
                 <DialogContent>
                 削除しますか?
                 </DialogContent>
@@ -65,7 +62,7 @@ export const ToDoContent: React.FC<Props> = ({id, title, onDelete }) => {
                     <Button onClick={deleteItem} >
                         削除する
                     </Button>
-                    <Button onClick={() => setIsConfirmationOpen(false)}>
+                    <Button onClick={() => setIsOpen(false)}>
                         キャンセル
                     </Button>
                 </DialogActions>

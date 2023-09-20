@@ -32,7 +32,7 @@ const ToDoList: React.FC = () => {
                 <AddButton />
             </Stack>
             {items.map((item) => (
-                <ToDoContent key = {item.id} id={item.id} title={item.title} onDelete={fetchData}/>
+                <ToDoContent key = {item.id} id={item.id} title={item.title} fetchData={fetchData}/>
             ))}
         </Stack>
 
