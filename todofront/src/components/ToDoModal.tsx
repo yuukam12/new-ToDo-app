@@ -13,24 +13,24 @@ type Props = {
   open: boolean;
   onClose: () => void;
   id: string;
-  title: string;
-  description: string;
+  Title: string;
+  Description: string;
 };
 
-export const ToDoModal: React.FC<Props> = ({ open, onClose, id, title, description}) => {
-    const [Title, setTitle] = useState('');
-    const [Description, setDescription] = useState('');
-    const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+export const ToDoModal: React.FC<Props> = ({ open, onClose, id, Title, Description}) => {
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        setTitle(title);
-    }, [title]); //Titleの初期値に編集前のtitleを入れる
+        setTitle(Title);
+    }, [Title]); //Titleの初期値に編集前のtitleを入れる
     useEffect(() => {
-        setDescription(description);
-    }, [description]); 
+        setDescription(Description);
+    }, [Description]); 
 
-    const handleSave = () => {
-        updateToDoItem(id, Title, Description)
+    const onSave = () => {
+        updateToDoItem(id, title, description)
         .then(() => {
             // 成功
             console.log("ToDo アイテムが更新されました。");
@@ -42,23 +42,19 @@ export const ToDoModal: React.FC<Props> = ({ open, onClose, id, title, descripti
         onClose();
     };
 
-    const handleClose = () => {
-        setIsConfirmationOpen(true);
-    };
-
-    const handleConfirmClose = () => {//アラート
-        setIsConfirmationOpen(false);
+    const onConfirmClose = () => {//アラート
+        setIsOpen(false);
         onClose();
     };
 
     return (
         <div>
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog open={open} onClose={() => setIsOpen(true)}>
             <DialogContent>
                 <Typography>タイトル</Typography>
                 <TextField
                     fullWidth
-                    value={Title}
+                    value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     variant="outlined"
                 />
@@ -67,30 +63,30 @@ export const ToDoModal: React.FC<Props> = ({ open, onClose, id, title, descripti
                     fullWidth
                     multiline
                     rows={3}
-                    value={Description}
+                    value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     variant="outlined"
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} variant="contained"  style={{ backgroundColor: '#555'}}>
+                <Button onClick={() => setIsOpen(true)} variant="contained"  style={{ backgroundColor: '#555'}}>
                     破棄
                 </Button>
-                <Button onClick={handleSave} variant="contained"  style={{ backgroundColor: '#555'}}>
+                <Button onClick={onSave} variant="contained"  style={{ backgroundColor: '#555'}}>
                     作成
                 </Button>
             </DialogActions>
         </Dialog>
         {/* 確認アラート */}
-        <Dialog open={isConfirmationOpen}>
+        <Dialog open={isOpen}>
             <DialogContent>
             破棄しますか?
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleConfirmClose} >
+                <Button onClick={onConfirmClose} >
                     破棄する
                 </Button>
-                <Button onClick={() => setIsConfirmationOpen(false)}>
+                <Button onClick={() => setIsOpen(false)}>
                     編集を続ける
                 </Button>
             </DialogActions>
