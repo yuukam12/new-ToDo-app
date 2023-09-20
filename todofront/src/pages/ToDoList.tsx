@@ -9,18 +9,19 @@ import Stack from '@mui/material/Stack';
 const ToDoList: React.FC = () => {
     const [items, setItems] = useState<ToDoItem[]>([]);
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const data = await getToDoItems();
-                setItems(data);
-            } catch (error) {
-                // エラーが発生した場合の処理
-                console.error('Error fetching data:', error);
-            }
+    const fetchData = async () => {
+        try {
+          const data = await getToDoItems();
+          setItems(data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
         }
+      };
+    
+      useEffect(() => {
         fetchData();
-    }, []); 
+      }, []);
+    
     
     return (
         <Stack direction="column">
@@ -31,7 +32,7 @@ const ToDoList: React.FC = () => {
                 <AddButton />
             </Stack>
             {items.map((item) => (
-                <ToDoContent key = {item.id} id={item.id} title={item.title} />
+                <ToDoContent key = {item.id} id={item.id} title={item.title} fetchData={fetchData}/>
             ))}
         </Stack>
 

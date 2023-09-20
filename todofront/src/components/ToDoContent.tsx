@@ -1,16 +1,22 @@
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import { getToDoItemDetail } from '../apis/api';
+import { getToDoItemDetail, deleteToDoItem } from '../apis/api';
+import {
+    Dialog,
+    DialogContent,
+    DialogActions,
+    Typography,
+    Stack,
+    Button,
+  } from '@mui/material';
 
 type Props = {
   id: string;
   title: string;
+  fetchData: () => void ;
 }
 
-export const ToDoContent: React.FC<Props> = ({id, title }) => {
+export const ToDoContent: React.FC<Props> = ({id, title, fetchData }) => {
     const navigate = useNavigate();
     //const setItemDetail = useState<ToDoItemDetail | null>(null);
     const onClick = () => {
@@ -27,9 +33,16 @@ export const ToDoContent: React.FC<Props> = ({id, title }) => {
       });
     };
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    const deleteItem = ()=>{
+        deleteToDoItem(id)
+        setIsOpen(false)
+        fetchData();
+    }
+
     return (
         <Stack
-            onClick={onClick}
             direction="row"
             alignItems="center"
             justifyContent="space-between"
@@ -37,10 +50,23 @@ export const ToDoContent: React.FC<Props> = ({id, title }) => {
             padding="8px"
             borderRadius="4px"
         >
-            <Typography variant="h6">{title}</Typography>
-            <Button variant="contained"  style={{ backgroundColor: '#555'}} >
+            <Typography variant="h6" onClick={onClick}>{title}</Typography>
+            <Button variant="contained"  style={{ backgroundColor: '#555'}} onClick={()=>setIsOpen}>
                 削除
             </Button>
+            <Dialog open={isOpen}>
+                <DialogContent>
+                削除しますか?
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={deleteItem} >
+                        削除する
+                    </Button>
+                    <Button onClick={() => setIsOpen(false)}>
+                        キャンセル
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Stack>
     );
 };
