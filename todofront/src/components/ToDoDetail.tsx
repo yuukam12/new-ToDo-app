@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { DateFormatter } from '../helpers/DateFormatter';
 import { ToDoModal } from './ToDoModal';
+import { updateToDoItem } from '../apis/api';
 
 type Props = {
     id: string;
@@ -15,11 +16,23 @@ type Props = {
 export const ToDoDetail: React.FC<Props> = ({ id, title, description, created_at }) => {
     const [isOpen, setIsOpen] = useState(false);
 
+    const onClick = (Title:string, Description: string) => {
+        updateToDoItem(id, Title, Description)
+        .then(() => {
+            console.log("ToDo アイテムが更新されました。");
+        })
+        .catch((error) => {
+            console.error("ToDo アイテムの更新中にエラーが発生しました。", error);
+        });
+        setIsOpen(false)
+    }
+
     return (
         <Stack>
             <Stack direction="row" alignItems="center" spacing={2}>
                 <Typography variant="h3">{title}</Typography>
                 <Button variant='outlined' color='inherit' onClick={() => setIsOpen(true)}>編集</Button>
+
             </Stack>
             <Typography variant="body2" color='lightgray'>
                 作成日： <DateFormatter UnformattedDate={created_at} />
@@ -28,11 +41,12 @@ export const ToDoDetail: React.FC<Props> = ({ id, title, description, created_at
 
             <ToDoModal
             open={isOpen}
-            onClose={() => setIsOpen(false)}
-            id={id}
-            title={title}
-            description={description}
+            onClick={onClick}
+            onClose={()=>setIsOpen(false)}
+            Title={title}
+            Description={description}
             />
+            )
         </Stack>
     );
 };

@@ -10,30 +10,41 @@ const ToDoList: React.FC = () => {
     const [items, setItems] = useState<ToDoItem[]>([]);
 
     const fetchData = async () => {
-        try {
-          const data = await getToDoItems();
-          setItems(data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-    
-      useEffect(() => {
-        fetchData();
-      }, []);
-    
-    
+      try {
+        const data = await getToDoItems();
+        setItems(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    const searchData = async (keyword: string) => {
+      try {
+        const data = await getToDoItems(keyword);
+        setItems(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+
+
     return (
-        <Stack direction="column">
+        <Stack direction="column" p = {2}>
             <Stack style={{ marginBottom: '10px' }}>
-                <SearchWindow />
+                <SearchWindow searchData={searchData}/>
             </Stack>
             <Stack style={{ marginLeft: 'auto', marginBottom: '10px'}}>
-                <AddButton />
+                <AddButton fetchData={fetchData} />
             </Stack>
+            <Stack direction="column" spacing={2}>
             {items.map((item) => (
                 <ToDoContent key = {item.id} id={item.id} title={item.title} fetchData={fetchData}/>
             ))}
+            </Stack>
         </Stack>
 
     );

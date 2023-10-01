@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import { getToDoItemDetail, deleteToDoItem } from '../apis/api';
 import {
     Dialog,
@@ -20,12 +20,9 @@ export const ToDoContent: React.FC<Props> = ({id, title, fetchData }) => {
     const navigate = useNavigate();
     //const setItemDetail = useState<ToDoItemDetail | null>(null);
     const onClick = () => {
-        // ToDoContentがクリックされたときの処理
         console.log('ToDoContent clicked with ID:', id);
         getToDoItemDetail(id)
       .then(() => {
-        // 取得した詳細情報を表示
-
         navigate(`/todos/${id}`);
       })
       .catch((error) => {
@@ -35,11 +32,16 @@ export const ToDoContent: React.FC<Props> = ({id, title, fetchData }) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const deleteItem = ()=>{
-        deleteToDoItem(id)
-        setIsOpen(false)
-        fetchData();
-    }
+    const deleteItem = async () => {
+        try {
+          await deleteToDoItem(id);
+          await fetchData();
+          setIsOpen(false);
+          console.log("Data fetched after deletion");
+        } catch (error) {
+          console.error("Error deleting or fetching data:", error);
+        }
+    };
 
     return (
         <Stack
@@ -51,7 +53,7 @@ export const ToDoContent: React.FC<Props> = ({id, title, fetchData }) => {
             borderRadius="4px"
         >
             <Typography variant="h6" onClick={onClick}>{title}</Typography>
-            <Button variant="contained"  style={{ backgroundColor: '#555'}} onClick={()=>setIsOpen}>
+            <Button variant="contained"  style={{ backgroundColor: '#555'}} onClick={()=>setIsOpen(true)}>
                 削除
             </Button>
             <Dialog open={isOpen}>
