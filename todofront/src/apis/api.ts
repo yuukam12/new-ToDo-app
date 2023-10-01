@@ -55,17 +55,3 @@ export async function postToDoItem(title: string, description: string){
     throw error;
   }
 }
-
-export async function searchToDoItem(keyword: string){
-  try{
-    const response = await ToDoApi.get('/todos',{
-      params: {
-        keyword: keyword,
-      },
-    });
-    console.log("searchToDoItem")
-    return response.data;
-  } catch (error){
-    throw error;
-  }
-}
